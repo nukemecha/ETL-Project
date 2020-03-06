@@ -14,8 +14,15 @@ The Economist’s Big Mac index
 https://www.kaggle.com/iampedroalz/worldwide-big-mac-prices
 
 
-World Happiness Report 2019
+World Happiness Report
 -----
-World happiness gauged by technologies, social norms, and government policies.
+Happiness scored according to economic production, social support, etc.
 -----
-https://www.kaggle.com/PromptCloudHQ/world-happiness-report-2019/data
+https://www.kaggle.com/unsdsn/world-happiness
+
+
+Gender Statistics
+-----
+The Gender Statistics database is a comprehensive source for the latest sex-disaggregated data and gender statistics covering demography, education, health, access to economic opportunities, public life and decision-making, and agency.
+-----
+https://datacatalog.worldbank.org/dataset/gender-statistics
