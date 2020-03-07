@@ -1,0 +1,1375 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.6
+-- Dumped by pg_dump version 11.6
+
+-- Started on 2020-03-07 11:04:15
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA public;
+
+
+--
+-- TOC entry 2861 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 202 (class 1259 OID 17200)
+-- Name: beer; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.beer (
+    index bigint,
+    "Country" text,
+    "Beer_PerCapita" bigint
+);
+
+
+--
+-- TOC entry 196 (class 1259 OID 17158)
+-- Name: bigmac; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.bigmac (
+    index bigint,
+    iso_a3 text,
+    currency_code text,
+    local_price double precision,
+    date text
+);
+
+
+--
+-- TOC entry 199 (class 1259 OID 17179)
+-- Name: country; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.country (
+    index bigint,
+    name text,
+    iso_a3 text
+);
+
+
+--
+-- TOC entry 200 (class 1259 OID 17186)
+-- Name: exchange_rate; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exchange_rate (
+    index bigint,
+    name text,
+    currency_code text,
+    dollar_ex double precision,
+    date text
+);
+
+
+--
+-- TOC entry 197 (class 1259 OID 17165)
+-- Name: gender; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.gender (
+    index bigint,
+    iso_a3 text,
+    female_pop double precision,
+    total_pop double precision,
+    female_to_total double precision
+);
+
+
+--
+-- TOC entry 198 (class 1259 OID 17172)
+-- Name: happy; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.happy (
+    index bigint,
+    country text,
+    score double precision
+);
+
+
+--
+-- TOC entry 201 (class 1259 OID 17193)
+-- Name: liquor; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.liquor (
+    index bigint,
+    "Country" text,
+    "Spirit_PerCapita" bigint
+);
+
+
+--
+-- TOC entry 203 (class 1259 OID 17207)
+-- Name: wine; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.wine (
+    index bigint,
+    "Country" text,
+    "Wine_PerCapita" bigint
+);
+
+
+--
+-- TOC entry 2854 (class 0 OID 17200)
+-- Dependencies: 202
+-- Data for Name: beer; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.beer VALUES (0, 'Denmark', 224);
+INSERT INTO public.beer VALUES (1, 'Switzerland', 185);
+INSERT INTO public.beer VALUES (2, 'Iceland', 233);
+INSERT INTO public.beer VALUES (3, 'Norway', 169);
+INSERT INTO public.beer VALUES (4, 'Finland', 263);
+INSERT INTO public.beer VALUES (5, 'Canada', 240);
+INSERT INTO public.beer VALUES (6, 'Netherlands', 251);
+INSERT INTO public.beer VALUES (7, 'New Zealand', 203);
+INSERT INTO public.beer VALUES (8, 'Australia', 261);
+INSERT INTO public.beer VALUES (9, 'Sweden', 152);
+INSERT INTO public.beer VALUES (10, 'Israel', 63);
+INSERT INTO public.beer VALUES (11, 'Austria', 279);
+INSERT INTO public.beer VALUES (12, 'United States', 249);
+INSERT INTO public.beer VALUES (13, 'Costa Rica', 149);
+INSERT INTO public.beer VALUES (14, 'Germany', 346);
+INSERT INTO public.beer VALUES (15, 'Brazil', 245);
+INSERT INTO public.beer VALUES (16, 'Belgium', 295);
+INSERT INTO public.beer VALUES (17, 'Ireland', 313);
+INSERT INTO public.beer VALUES (18, 'Luxembourg', 236);
+INSERT INTO public.beer VALUES (19, 'Mexico', 238);
+INSERT INTO public.beer VALUES (20, 'Singapore', 60);
+INSERT INTO public.beer VALUES (21, 'United Kingdom', 219);
+INSERT INTO public.beer VALUES (22, 'Chile', 130);
+INSERT INTO public.beer VALUES (23, 'Panama', 285);
+INSERT INTO public.beer VALUES (24, 'Argentina', 193);
+INSERT INTO public.beer VALUES (25, 'Czech Republic', 361);
+INSERT INTO public.beer VALUES (26, 'United Arab Emirates', 16);
+INSERT INTO public.beer VALUES (27, 'Uruguay', 115);
+INSERT INTO public.beer VALUES (28, 'Malta', 149);
+INSERT INTO public.beer VALUES (29, 'Colombia', 159);
+INSERT INTO public.beer VALUES (30, 'France', 127);
+INSERT INTO public.beer VALUES (31, 'Thailand', 99);
+INSERT INTO public.beer VALUES (32, 'Qatar', 1);
+INSERT INTO public.beer VALUES (33, 'Spain', 284);
+INSERT INTO public.beer VALUES (34, 'Guatemala', 53);
+INSERT INTO public.beer VALUES (35, 'Suriname', 128);
+INSERT INTO public.beer VALUES (36, 'Bahrain', 42);
+INSERT INTO public.beer VALUES (37, 'Trinidad and Tobago', 197);
+INSERT INTO public.beer VALUES (38, 'Venezuela', 333);
+INSERT INTO public.beer VALUES (39, 'Slovakia', 196);
+INSERT INTO public.beer VALUES (40, 'El Salvador', 52);
+INSERT INTO public.beer VALUES (41, 'Nicaragua', 78);
+INSERT INTO public.beer VALUES (42, 'Uzbekistan', 25);
+INSERT INTO public.beer VALUES (43, 'Italy', 85);
+INSERT INTO public.beer VALUES (44, 'Ecuador', 162);
+INSERT INTO public.beer VALUES (45, 'Belize', 263);
+INSERT INTO public.beer VALUES (46, 'Japan', 77);
+INSERT INTO public.beer VALUES (47, 'Kazakhstan', 124);
+INSERT INTO public.beer VALUES (48, 'Moldova', 109);
+INSERT INTO public.beer VALUES (49, 'Russian Federation', 247);
+INSERT INTO public.beer VALUES (50, 'Poland', 343);
+INSERT INTO public.beer VALUES (51, 'South Korea', 140);
+INSERT INTO public.beer VALUES (52, 'Bolivia', 167);
+INSERT INTO public.beer VALUES (53, 'Lithuania', 343);
+INSERT INTO public.beer VALUES (54, 'Belarus', 142);
+INSERT INTO public.beer VALUES (55, 'Slovenia', 270);
+INSERT INTO public.beer VALUES (56, 'Peru', 163);
+INSERT INTO public.beer VALUES (57, 'Turkmenistan', 19);
+INSERT INTO public.beer VALUES (58, 'Mauritius', 98);
+INSERT INTO public.beer VALUES (59, 'Latvia', 281);
+INSERT INTO public.beer VALUES (60, 'Cyprus', 192);
+INSERT INTO public.beer VALUES (61, 'Paraguay', 213);
+INSERT INTO public.beer VALUES (62, 'Romania', 297);
+INSERT INTO public.beer VALUES (63, 'Estonia', 224);
+INSERT INTO public.beer VALUES (64, 'Jamaica', 82);
+INSERT INTO public.beer VALUES (65, 'Croatia', 230);
+INSERT INTO public.beer VALUES (66, 'Turkey', 51);
+INSERT INTO public.beer VALUES (67, 'Jordan', 6);
+INSERT INTO public.beer VALUES (68, 'Azerbaijan', 21);
+INSERT INTO public.beer VALUES (69, 'Philippines', 71);
+INSERT INTO public.beer VALUES (70, 'China', 79);
+INSERT INTO public.beer VALUES (71, 'Kyrgyzstan', 31);
+INSERT INTO public.beer VALUES (72, 'Serbia', 283);
+INSERT INTO public.beer VALUES (73, 'Bosnia and Herzegovina', 76);
+INSERT INTO public.beer VALUES (74, 'Montenegro', 31);
+INSERT INTO public.beer VALUES (75, 'Dominican Republic', 193);
+INSERT INTO public.beer VALUES (76, 'Morocco', 12);
+INSERT INTO public.beer VALUES (77, 'Hungary', 234);
+INSERT INTO public.beer VALUES (78, 'Lebanon', 20);
+INSERT INTO public.beer VALUES (79, 'Portugal', 194);
+INSERT INTO public.beer VALUES (80, 'Macedonia', 106);
+INSERT INTO public.beer VALUES (81, 'Vietnam', 111);
+INSERT INTO public.beer VALUES (82, 'Tunisia', 51);
+INSERT INTO public.beer VALUES (83, 'Greece', 133);
+INSERT INTO public.beer VALUES (84, 'Mongolia', 77);
+INSERT INTO public.beer VALUES (85, 'Nigeria', 42);
+INSERT INTO public.beer VALUES (86, 'Honduras', 69);
+INSERT INTO public.beer VALUES (87, 'Zambia', 32);
+INSERT INTO public.beer VALUES (88, 'Albania', 89);
+INSERT INTO public.beer VALUES (89, 'Sierra Leone', 25);
+INSERT INTO public.beer VALUES (90, 'Namibia', 376);
+INSERT INTO public.beer VALUES (91, 'Cameroon', 147);
+INSERT INTO public.beer VALUES (92, 'South Africa', 225);
+INSERT INTO public.beer VALUES (93, 'Egypt', 6);
+INSERT INTO public.beer VALUES (94, 'Armenia', 21);
+INSERT INTO public.beer VALUES (95, 'Kenya', 58);
+INSERT INTO public.beer VALUES (96, 'Ukraine', 206);
+INSERT INTO public.beer VALUES (97, 'Ghana', 31);
+INSERT INTO public.beer VALUES (98, 'Dem. Rep. Congo', 32);
+INSERT INTO public.beer VALUES (99, 'Georgia', 52);
+INSERT INTO public.beer VALUES (100, 'Rep. Congo', 76);
+INSERT INTO public.beer VALUES (101, 'Senegal', 9);
+INSERT INTO public.beer VALUES (102, 'Bulgaria', 231);
+INSERT INTO public.beer VALUES (103, 'Zimbabwe', 64);
+INSERT INTO public.beer VALUES (104, 'Malawi', 8);
+INSERT INTO public.beer VALUES (105, 'Gabon', 347);
+INSERT INTO public.beer VALUES (106, 'Mali', 5);
+INSERT INTO public.beer VALUES (107, 'Haiti', 1);
+INSERT INTO public.beer VALUES (108, 'Botswana', 173);
+INSERT INTO public.beer VALUES (109, 'Comoros', 1);
+INSERT INTO public.beer VALUES (110, 'Cote d''Ivoire', 37);
+INSERT INTO public.beer VALUES (111, 'Cambodia', 57);
+INSERT INTO public.beer VALUES (112, 'Angola', 217);
+INSERT INTO public.beer VALUES (113, 'Niger', 3);
+INSERT INTO public.beer VALUES (114, 'Chad', 15);
+INSERT INTO public.beer VALUES (115, 'Burkina Faso', 25);
+INSERT INTO public.beer VALUES (116, 'Madagascar', 26);
+INSERT INTO public.beer VALUES (117, 'Tanzania', 36);
+INSERT INTO public.beer VALUES (118, 'Liberia', 19);
+INSERT INTO public.beer VALUES (119, 'Benin', 34);
+INSERT INTO public.beer VALUES (120, 'Togo', 36);
+INSERT INTO public.beer VALUES (121, 'Syria', 5);
+
+
+--
+-- TOC entry 2848 (class 0 OID 17158)
+-- Dependencies: 196
+-- Data for Name: bigmac; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.bigmac VALUES (0, 'ARG', 'ARS', 33, '2016-01-01');
+INSERT INTO public.bigmac VALUES (1, 'AUS', 'AUD', 5.29999999999999982, '2016-01-01');
+INSERT INTO public.bigmac VALUES (2, 'AUT', 'EUR', 3.5, '2016-01-01');
+INSERT INTO public.bigmac VALUES (3, 'BEL', 'EUR', 3.95000000000000018, '2016-01-01');
+INSERT INTO public.bigmac VALUES (4, 'BRA', 'BRL', 13.5, '2016-01-01');
+INSERT INTO public.bigmac VALUES (5, 'GBR', 'GBP', 2.89000000000000012, '2016-01-01');
+INSERT INTO public.bigmac VALUES (6, 'CAN', 'CAD', 5.83999999999999986, '2016-01-01');
+INSERT INTO public.bigmac VALUES (7, 'CHL', 'CLP', 2100, '2016-01-01');
+INSERT INTO public.bigmac VALUES (8, 'CHN', 'CNY', 17.6000000000000014, '2016-01-01');
+INSERT INTO public.bigmac VALUES (9, 'COL', 'COP', 7900, '2016-01-01');
+INSERT INTO public.bigmac VALUES (10, 'CRI', 'CRC', 2150, '2016-01-01');
+INSERT INTO public.bigmac VALUES (11, 'CZE', 'CZK', 75, '2016-01-01');
+INSERT INTO public.bigmac VALUES (12, 'DNK', 'DKK', 30, '2016-01-01');
+INSERT INTO public.bigmac VALUES (13, 'EGY', 'EGP', 16.9299999999999997, '2016-01-01');
+INSERT INTO public.bigmac VALUES (14, 'EST', 'EUR', 3, '2016-01-01');
+INSERT INTO public.bigmac VALUES (15, 'EUZ', 'EUR', 3.7200000000000002, '2016-01-01');
+INSERT INTO public.bigmac VALUES (16, 'FIN', 'EUR', 4.09999999999999964, '2016-01-01');
+INSERT INTO public.bigmac VALUES (17, 'FRA', 'EUR', 4.09999999999999964, '2016-01-01');
+INSERT INTO public.bigmac VALUES (18, 'DEU', 'EUR', 3.58999999999999986, '2016-01-01');
+INSERT INTO public.bigmac VALUES (19, 'GRC', 'EUR', 3.35000000000000009, '2016-01-01');
+INSERT INTO public.bigmac VALUES (20, 'HKG', 'HKD', 19.1999999999999993, '2016-01-01');
+INSERT INTO public.bigmac VALUES (21, 'HUN', 'HUF', 900, '2016-01-01');
+INSERT INTO public.bigmac VALUES (22, 'IND', 'INR', 127, '2016-01-01');
+INSERT INTO public.bigmac VALUES (23, 'IDN', 'IDR', 30500, '2016-01-01');
+INSERT INTO public.bigmac VALUES (24, 'IRL', 'EUR', 3.95000000000000018, '2016-01-01');
+INSERT INTO public.bigmac VALUES (25, 'ISR', 'ILS', 16.8999999999999986, '2016-01-01');
+INSERT INTO public.bigmac VALUES (26, 'ITA', 'EUR', 4, '2016-01-01');
+INSERT INTO public.bigmac VALUES (27, 'JPN', 'JPY', 370, '2016-01-01');
+INSERT INTO public.bigmac VALUES (28, 'MYS', 'MYR', 8, '2016-01-01');
+INSERT INTO public.bigmac VALUES (29, 'MEX', 'MXN', 49, '2016-01-01');
+INSERT INTO public.bigmac VALUES (30, 'NLD', 'EUR', 3.45000000000000018, '2016-01-01');
+INSERT INTO public.bigmac VALUES (31, 'NZL', 'NZD', 5.90000000000000036, '2016-01-01');
+INSERT INTO public.bigmac VALUES (32, 'NOR', 'NOK', 46.7999999999999972, '2016-01-01');
+INSERT INTO public.bigmac VALUES (33, 'PAK', 'PKR', 300, '2016-01-01');
+INSERT INTO public.bigmac VALUES (34, 'PER', 'PEN', 10, '2016-01-01');
+INSERT INTO public.bigmac VALUES (35, 'PHL', 'PHP', 131, '2016-01-01');
+INSERT INTO public.bigmac VALUES (36, 'POL', 'PLN', 9.59999999999999964, '2016-01-01');
+INSERT INTO public.bigmac VALUES (37, 'PRT', 'EUR', 3, '2016-01-01');
+INSERT INTO public.bigmac VALUES (38, 'RUS', 'RUB', 114, '2016-01-01');
+INSERT INTO public.bigmac VALUES (39, 'SAU', 'SAR', 12, '2016-01-01');
+INSERT INTO public.bigmac VALUES (40, 'SGP', 'SGD', 4.70000000000000018, '2016-01-01');
+INSERT INTO public.bigmac VALUES (41, 'ZAF', 'ZAR', 28, '2016-01-01');
+INSERT INTO public.bigmac VALUES (42, 'KOR', 'KRW', 4300, '2016-01-01');
+INSERT INTO public.bigmac VALUES (43, 'ESP', 'EUR', 3.5, '2016-01-01');
+INSERT INTO public.bigmac VALUES (44, 'LKA', 'LKR', 350, '2016-01-01');
+INSERT INTO public.bigmac VALUES (45, 'SWE', 'SEK', 45, '2016-01-01');
+INSERT INTO public.bigmac VALUES (46, 'CHE', 'CHF', 6.5, '2016-01-01');
+INSERT INTO public.bigmac VALUES (47, 'TWN', 'TWD', 69, '2016-01-01');
+INSERT INTO public.bigmac VALUES (48, 'THA', 'THB', 112, '2016-01-01');
+INSERT INTO public.bigmac VALUES (49, 'TUR', 'TRY', 10.25, '2016-01-01');
+INSERT INTO public.bigmac VALUES (50, 'ARE', 'AED', 13, '2016-01-01');
+INSERT INTO public.bigmac VALUES (51, 'UKR', 'UAH', 36, '2016-01-01');
+INSERT INTO public.bigmac VALUES (52, 'USA', 'USD', 4.92999999999999972, '2016-01-01');
+INSERT INTO public.bigmac VALUES (53, 'URY', 'UYU', 113, '2016-01-01');
+INSERT INTO public.bigmac VALUES (54, 'VEN', 'VEF', 132, '2016-01-01');
+INSERT INTO public.bigmac VALUES (55, 'VNM', 'VND', 60000, '2016-01-01');
+INSERT INTO public.bigmac VALUES (56, 'ARG', 'ARS', 50, '2016-07-01');
+INSERT INTO public.bigmac VALUES (57, 'AUS', 'AUD', 5.75, '2016-07-01');
+INSERT INTO public.bigmac VALUES (58, 'AUT', 'EUR', 3.60000000000000009, '2016-07-01');
+INSERT INTO public.bigmac VALUES (59, 'BEL', 'EUR', 3.95000000000000018, '2016-07-01');
+INSERT INTO public.bigmac VALUES (60, 'BRA', 'BRL', 15.5, '2016-07-01');
+INSERT INTO public.bigmac VALUES (61, 'GBR', 'GBP', 2.99000000000000021, '2016-07-01');
+INSERT INTO public.bigmac VALUES (62, 'CAN', 'CAD', 6, '2016-07-01');
+INSERT INTO public.bigmac VALUES (63, 'CHL', 'CLP', 2300, '2016-07-01');
+INSERT INTO public.bigmac VALUES (64, 'CHN', 'CNY', 18.6000000000000014, '2016-07-01');
+INSERT INTO public.bigmac VALUES (65, 'COL', 'COP', 8900, '2016-07-01');
+INSERT INTO public.bigmac VALUES (66, 'CRI', 'CRC', 2250, '2016-07-01');
+INSERT INTO public.bigmac VALUES (67, 'CZE', 'CZK', 75, '2016-07-01');
+INSERT INTO public.bigmac VALUES (68, 'DNK', 'DKK', 30, '2016-07-01');
+INSERT INTO public.bigmac VALUES (69, 'EGY', 'EGP', 23, '2016-07-01');
+INSERT INTO public.bigmac VALUES (70, 'EST', 'EUR', 3.10000000000000009, '2016-07-01');
+INSERT INTO public.bigmac VALUES (71, 'EUZ', 'EUR', 3.81999999999999984, '2016-07-01');
+INSERT INTO public.bigmac VALUES (72, 'FIN', 'EUR', 4.59999999999999964, '2016-07-01');
+INSERT INTO public.bigmac VALUES (73, 'FRA', 'EUR', 4.09999999999999964, '2016-07-01');
+INSERT INTO public.bigmac VALUES (74, 'DEU', 'EUR', 3.79000000000000004, '2016-07-01');
+INSERT INTO public.bigmac VALUES (75, 'GRC', 'EUR', 3.35000000000000009, '2016-07-01');
+INSERT INTO public.bigmac VALUES (76, 'HKG', 'HKD', 19.1999999999999993, '2016-07-01');
+INSERT INTO public.bigmac VALUES (77, 'HUN', 'HUF', 900, '2016-07-01');
+INSERT INTO public.bigmac VALUES (78, 'IND', 'INR', 162, '2016-07-01');
+INSERT INTO public.bigmac VALUES (79, 'IDN', 'IDR', 31000, '2016-07-01');
+INSERT INTO public.bigmac VALUES (80, 'IRL', 'EUR', 4, '2016-07-01');
+INSERT INTO public.bigmac VALUES (81, 'ISR', 'ILS', 16.8999999999999986, '2016-07-01');
+INSERT INTO public.bigmac VALUES (82, 'ITA', 'EUR', 4.20000000000000018, '2016-07-01');
+INSERT INTO public.bigmac VALUES (83, 'JPN', 'JPY', 370, '2016-07-01');
+INSERT INTO public.bigmac VALUES (84, 'MYS', 'MYR', 8, '2016-07-01');
+INSERT INTO public.bigmac VALUES (85, 'MEX', 'MXN', 44, '2016-07-01');
+INSERT INTO public.bigmac VALUES (86, 'NLD', 'EUR', 3.45000000000000018, '2016-07-01');
+INSERT INTO public.bigmac VALUES (87, 'NZL', 'NZD', 6, '2016-07-01');
+INSERT INTO public.bigmac VALUES (88, 'NOR', 'NOK', 46.7999999999999972, '2016-07-01');
+INSERT INTO public.bigmac VALUES (89, 'PAK', 'PKR', 375, '2016-07-01');
+INSERT INTO public.bigmac VALUES (90, 'PER', 'PEN', 10, '2016-07-01');
+INSERT INTO public.bigmac VALUES (91, 'PHL', 'PHP', 133, '2016-07-01');
+INSERT INTO public.bigmac VALUES (92, 'POL', 'PLN', 9.59999999999999964, '2016-07-01');
+INSERT INTO public.bigmac VALUES (93, 'PRT', 'EUR', 3.04999999999999982, '2016-07-01');
+INSERT INTO public.bigmac VALUES (94, 'RUS', 'RUB', 130, '2016-07-01');
+INSERT INTO public.bigmac VALUES (95, 'SAU', 'SAR', 12, '2016-07-01');
+INSERT INTO public.bigmac VALUES (96, 'SGP', 'SGD', 5.45000000000000018, '2016-07-01');
+INSERT INTO public.bigmac VALUES (97, 'ZAF', 'ZAR', 30, '2016-07-01');
+INSERT INTO public.bigmac VALUES (98, 'KOR', 'KRW', 4400, '2016-07-01');
+INSERT INTO public.bigmac VALUES (99, 'ESP', 'EUR', 3.5, '2016-07-01');
+INSERT INTO public.bigmac VALUES (100, 'LKA', 'LKR', 530, '2016-07-01');
+INSERT INTO public.bigmac VALUES (101, 'SWE', 'SEK', 44.9399999999999977, '2016-07-01');
+INSERT INTO public.bigmac VALUES (102, 'CHE', 'CHF', 6.5, '2016-07-01');
+INSERT INTO public.bigmac VALUES (103, 'TWN', 'TWD', 69, '2016-07-01');
+INSERT INTO public.bigmac VALUES (104, 'THA', 'THB', 119, '2016-07-01');
+INSERT INTO public.bigmac VALUES (105, 'TUR', 'TRY', 10.75, '2016-07-01');
+INSERT INTO public.bigmac VALUES (106, 'ARE', 'AED', 13, '2016-07-01');
+INSERT INTO public.bigmac VALUES (107, 'UKR', 'UAH', 39, '2016-07-01');
+INSERT INTO public.bigmac VALUES (108, 'USA', 'USD', 5.04000000000000004, '2016-07-01');
+INSERT INTO public.bigmac VALUES (109, 'URY', 'UYU', 123, '2016-07-01');
+INSERT INTO public.bigmac VALUES (110, 'VEN', 'VEF', 2170, '2016-07-01');
+INSERT INTO public.bigmac VALUES (111, 'VNM', 'VND', 60000, '2016-07-01');
+
+
+--
+-- TOC entry 2851 (class 0 OID 17179)
+-- Dependencies: 199
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.country VALUES (0, 'Argentina', 'ARG');
+INSERT INTO public.country VALUES (1, 'Australia', 'AUS');
+INSERT INTO public.country VALUES (2, 'Austria', 'AUT');
+INSERT INTO public.country VALUES (3, 'Belgium', 'BEL');
+INSERT INTO public.country VALUES (4, 'Brazil', 'BRA');
+INSERT INTO public.country VALUES (5, 'Britain', 'GBR');
+INSERT INTO public.country VALUES (6, 'Canada', 'CAN');
+INSERT INTO public.country VALUES (7, 'Chile', 'CHL');
+INSERT INTO public.country VALUES (8, 'China', 'CHN');
+INSERT INTO public.country VALUES (9, 'Colombia', 'COL');
+INSERT INTO public.country VALUES (10, 'Costa Rica', 'CRI');
+INSERT INTO public.country VALUES (11, 'Czech Republic', 'CZE');
+INSERT INTO public.country VALUES (12, 'Denmark', 'DNK');
+INSERT INTO public.country VALUES (13, 'Egypt', 'EGY');
+INSERT INTO public.country VALUES (14, 'Estonia', 'EST');
+INSERT INTO public.country VALUES (15, 'Euro area', 'EUZ');
+INSERT INTO public.country VALUES (16, 'Finland', 'FIN');
+INSERT INTO public.country VALUES (17, 'France', 'FRA');
+INSERT INTO public.country VALUES (18, 'Germany', 'DEU');
+INSERT INTO public.country VALUES (19, 'Greece', 'GRC');
+INSERT INTO public.country VALUES (20, 'Hong Kong', 'HKG');
+INSERT INTO public.country VALUES (21, 'Hungary', 'HUN');
+INSERT INTO public.country VALUES (22, 'India', 'IND');
+INSERT INTO public.country VALUES (23, 'Indonesia', 'IDN');
+INSERT INTO public.country VALUES (24, 'Ireland', 'IRL');
+INSERT INTO public.country VALUES (25, 'Israel', 'ISR');
+INSERT INTO public.country VALUES (26, 'Italy', 'ITA');
+INSERT INTO public.country VALUES (27, 'Japan', 'JPN');
+INSERT INTO public.country VALUES (28, 'Malaysia', 'MYS');
+INSERT INTO public.country VALUES (29, 'Mexico', 'MEX');
+INSERT INTO public.country VALUES (30, 'Netherlands', 'NLD');
+INSERT INTO public.country VALUES (31, 'New Zealand', 'NZL');
+INSERT INTO public.country VALUES (32, 'Norway', 'NOR');
+INSERT INTO public.country VALUES (33, 'Pakistan', 'PAK');
+INSERT INTO public.country VALUES (34, 'Peru', 'PER');
+INSERT INTO public.country VALUES (35, 'Philippines', 'PHL');
+INSERT INTO public.country VALUES (36, 'Poland', 'POL');
+INSERT INTO public.country VALUES (37, 'Portugal', 'PRT');
+INSERT INTO public.country VALUES (38, 'Russia', 'RUS');
+INSERT INTO public.country VALUES (39, 'Saudi Arabia', 'SAU');
+INSERT INTO public.country VALUES (40, 'Singapore', 'SGP');
+INSERT INTO public.country VALUES (41, 'South Africa', 'ZAF');
+INSERT INTO public.country VALUES (42, 'South Korea', 'KOR');
+INSERT INTO public.country VALUES (43, 'Spain', 'ESP');
+INSERT INTO public.country VALUES (44, 'Sri Lanka', 'LKA');
+INSERT INTO public.country VALUES (45, 'Sweden', 'SWE');
+INSERT INTO public.country VALUES (46, 'Switzerland', 'CHE');
+INSERT INTO public.country VALUES (47, 'Taiwan', 'TWN');
+INSERT INTO public.country VALUES (48, 'Thailand', 'THA');
+INSERT INTO public.country VALUES (49, 'Turkey', 'TUR');
+INSERT INTO public.country VALUES (50, 'UAE', 'ARE');
+INSERT INTO public.country VALUES (51, 'Ukraine', 'UKR');
+INSERT INTO public.country VALUES (52, 'United States', 'USA');
+INSERT INTO public.country VALUES (53, 'Uruguay', 'URY');
+INSERT INTO public.country VALUES (54, 'Venezuela', 'VEN');
+INSERT INTO public.country VALUES (55, 'Vietnam', 'VNM');
+INSERT INTO public.country VALUES (56, 'Argentina', 'ARG');
+INSERT INTO public.country VALUES (57, 'Australia', 'AUS');
+INSERT INTO public.country VALUES (58, 'Austria', 'AUT');
+INSERT INTO public.country VALUES (59, 'Belgium', 'BEL');
+INSERT INTO public.country VALUES (60, 'Brazil', 'BRA');
+INSERT INTO public.country VALUES (61, 'Britain', 'GBR');
+INSERT INTO public.country VALUES (62, 'Canada', 'CAN');
+INSERT INTO public.country VALUES (63, 'Chile', 'CHL');
+INSERT INTO public.country VALUES (64, 'China', 'CHN');
+INSERT INTO public.country VALUES (65, 'Colombia', 'COL');
+INSERT INTO public.country VALUES (66, 'Costa Rica', 'CRI');
+INSERT INTO public.country VALUES (67, 'Czech Republic', 'CZE');
+INSERT INTO public.country VALUES (68, 'Denmark', 'DNK');
+INSERT INTO public.country VALUES (69, 'Egypt', 'EGY');
+INSERT INTO public.country VALUES (70, 'Estonia', 'EST');
+INSERT INTO public.country VALUES (71, 'Euro area', 'EUZ');
+INSERT INTO public.country VALUES (72, 'Finland', 'FIN');
+INSERT INTO public.country VALUES (73, 'France', 'FRA');
+INSERT INTO public.country VALUES (74, 'Germany', 'DEU');
+INSERT INTO public.country VALUES (75, 'Greece', 'GRC');
+INSERT INTO public.country VALUES (76, 'Hong Kong', 'HKG');
+INSERT INTO public.country VALUES (77, 'Hungary', 'HUN');
+INSERT INTO public.country VALUES (78, 'India', 'IND');
+INSERT INTO public.country VALUES (79, 'Indonesia', 'IDN');
+INSERT INTO public.country VALUES (80, 'Ireland', 'IRL');
+INSERT INTO public.country VALUES (81, 'Israel', 'ISR');
+INSERT INTO public.country VALUES (82, 'Italy', 'ITA');
+INSERT INTO public.country VALUES (83, 'Japan', 'JPN');
+INSERT INTO public.country VALUES (84, 'Malaysia', 'MYS');
+INSERT INTO public.country VALUES (85, 'Mexico', 'MEX');
+INSERT INTO public.country VALUES (86, 'Netherlands', 'NLD');
+INSERT INTO public.country VALUES (87, 'New Zealand', 'NZL');
+INSERT INTO public.country VALUES (88, 'Norway', 'NOR');
+INSERT INTO public.country VALUES (89, 'Pakistan', 'PAK');
+INSERT INTO public.country VALUES (90, 'Peru', 'PER');
+INSERT INTO public.country VALUES (91, 'Philippines', 'PHL');
+INSERT INTO public.country VALUES (92, 'Poland', 'POL');
+INSERT INTO public.country VALUES (93, 'Portugal', 'PRT');
+INSERT INTO public.country VALUES (94, 'Russia', 'RUS');
+INSERT INTO public.country VALUES (95, 'Saudi Arabia', 'SAU');
+INSERT INTO public.country VALUES (96, 'Singapore', 'SGP');
+INSERT INTO public.country VALUES (97, 'South Africa', 'ZAF');
+INSERT INTO public.country VALUES (98, 'South Korea', 'KOR');
+INSERT INTO public.country VALUES (99, 'Spain', 'ESP');
+INSERT INTO public.country VALUES (100, 'Sri Lanka', 'LKA');
+INSERT INTO public.country VALUES (101, 'Sweden', 'SWE');
+INSERT INTO public.country VALUES (102, 'Switzerland', 'CHE');
+INSERT INTO public.country VALUES (103, 'Taiwan', 'TWN');
+INSERT INTO public.country VALUES (104, 'Thailand', 'THA');
+INSERT INTO public.country VALUES (105, 'Turkey', 'TUR');
+INSERT INTO public.country VALUES (106, 'UAE', 'ARE');
+INSERT INTO public.country VALUES (107, 'Ukraine', 'UKR');
+INSERT INTO public.country VALUES (108, 'United States', 'USA');
+INSERT INTO public.country VALUES (109, 'Uruguay', 'URY');
+INSERT INTO public.country VALUES (110, 'Venezuela', 'VEN');
+INSERT INTO public.country VALUES (111, 'Vietnam', 'VNM');
+
+
+--
+-- TOC entry 2852 (class 0 OID 17186)
+-- Dependencies: 200
+-- Data for Name: exchange_rate; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.exchange_rate VALUES (0, 'Argentina', 'ARS', 13.8092500000000005, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (1, 'Australia', 'AUD', 1.41572874600000009, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (2, 'Austria', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (3, 'Belgium', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (4, 'Brazil', 'BRL', 4.02479999999999993, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (5, 'Britain', 'GBP', 0.684532977000000042, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (6, 'Canada', 'CAD', 1.40920000000000001, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (7, 'Chile', 'CLP', 715.215000000000032, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (8, 'China', 'CNY', 6.55820000000000025, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (9, 'Colombia', 'COP', 3253.90000000000009, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (10, 'Costa Rica', 'CRC', 535.25, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (11, 'Czech Republic', 'CZK', 25.1442000000000014, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (12, 'Denmark', 'DKK', 6.94050000000000011, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (13, 'Egypt', 'EGP', 7.83004999999999995, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (14, 'Estonia', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (15, 'Euro area', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (16, 'Finland', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (17, 'France', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (18, 'Germany', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (19, 'Greece', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (20, 'Hong Kong', 'HKD', 7.75234999999999985, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (21, 'Hungary', 'HUF', 292.679050000000018, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (22, 'India', 'INR', 66.8024999999999949, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (23, 'Indonesia', 'IDR', 13947.5, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (24, 'Ireland', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (25, 'Israel', 'ILS', 3.94105000000000016, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (26, 'Italy', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (27, 'Japan', 'JPY', 118.644999999999996, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (28, 'Malaysia', 'MYR', 4.39250000000000007, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (29, 'Mexico', 'MXN', 17.43675, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (30, 'Netherlands', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (31, 'New Zealand', 'NZD', 1.50806816500000007, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (32, 'Norway', 'NOK', 8.97465000000000046, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (33, 'Pakistan', 'PKR', 104.885000000000005, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (34, 'Peru', 'PEN', 3.41800000000000015, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (35, 'Philippines', 'PHP', 47.0225000000000009, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (36, 'Poland', 'PLN', 4.04769999999999985, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (37, 'Portugal', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (38, 'Russia', 'RUB', 74.6550000000000011, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (39, 'Saudi Arabia', 'SAR', 3.75430000000000019, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (40, 'Singapore', 'SGD', 1.43724999999999992, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (41, 'South Africa', 'ZAR', 15.8137500000000006, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (42, 'South Korea', 'KRW', 1197.75, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (43, 'Spain', 'EUR', 0.930232558000000043, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (44, 'Sri Lanka', 'LKR', 144.050000000000011, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (45, 'Sweden', 'SEK', 8.60185000000000066, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (46, 'Switzerland', 'CHF', 1.00879999999999992, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (47, 'Taiwan', 'TWD', 33.2314999999999969, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (48, 'Thailand', 'THB', 36.2199999999999989, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (49, 'Turkey', 'TRY', 3.00959999999999983, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (50, 'UAE', 'AED', 3.67309999999999981, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (51, 'Ukraine', 'UAH', 23.3500000000000014, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (52, 'United States', 'USD', 1, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (53, 'Uruguay', 'UYU', 30.1849999999999987, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (54, 'Venezuela', 'VEF', 198.698599999999999, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (55, 'Vietnam', 'VND', 22467.5, '2016-01-01');
+INSERT INTO public.exchange_rate VALUES (56, 'Argentina', 'ARS', 14.9350000000000005, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (57, 'Australia', 'AUD', 1.33573766100000002, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (58, 'Austria', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (59, 'Belgium', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (60, 'Brazil', 'BRL', 3.24144999999999994, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (61, 'Britain', 'GBP', 0.758840492000000033, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (62, 'Canada', 'CAD', 1.30300000000000016, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (63, 'Chile', 'CLP', 651.120000000000005, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (64, 'China', 'CNY', 6.67799999999999994, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (65, 'Colombia', 'COP', 2929, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (66, 'Costa Rica', 'CRC', 546.389999999999986, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (67, 'Czech Republic', 'CZK', 24.5465499999999999, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (68, 'Denmark', 'DKK', 6.75715000000000021, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (69, 'Egypt', 'EGP', 8.87994999999999912, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (70, 'Estonia', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (71, 'Euro area', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (72, 'Finland', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (73, 'France', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (74, 'Germany', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (75, 'Greece', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (76, 'Hong Kong', 'HKD', 7.75539999999999985, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (77, 'Hungary', 'HUF', 285.639700000000005, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (78, 'India', 'INR', 67.2000000000000028, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (79, 'Indonesia', 'IDR', 13112.5, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (80, 'Ireland', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (81, 'Israel', 'ILS', 3.85875000000000012, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (82, 'Italy', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (83, 'Japan', 'JPY', 106.724999999999994, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (84, 'Malaysia', 'MYR', 4.02700000000000014, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (85, 'Mexico', 'MXN', 18.5350000000000001, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (86, 'Netherlands', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (87, 'New Zealand', 'NZD', 1.4213630869999998, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (88, 'Norway', 'NOK', 8.49355000000000082, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (89, 'Pakistan', 'PKR', 104.819999999999993, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (90, 'Peru', 'PEN', 3.30584999999999996, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (91, 'Philippines', 'PHP', 47.115000000000002, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (92, 'Poland', 'PLN', 3.96565000000000012, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (93, 'Portugal', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (94, 'Russia', 'RUB', 63.4075500000000005, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (95, 'Saudi Arabia', 'SAR', 3.75050000000000017, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (96, 'Singapore', 'SGD', 1.35769999999999991, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (97, 'South Africa', 'ZAR', 14.2737499999999997, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (98, 'South Korea', 'KRW', 1140.95000000000005, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (99, 'Spain', 'EUR', 0.908306462999999953, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (100, 'Sri Lanka', 'LKR', 146.199999999999989, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (101, 'Sweden', 'SEK', 8.59484999999999921, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (102, 'Switzerland', 'CHF', 0.986099999999999977, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (103, 'Taiwan', 'TWD', 32.0290000000000035, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (104, 'Thailand', 'THB', 34.9650000000000034, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (105, 'Turkey', 'TRY', 3.04305000000000003, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (106, 'UAE', 'AED', 3.67309999999999981, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (107, 'Ukraine', 'UAH', 24.8000000000000007, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (108, 'United States', 'USD', 1, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (109, 'Uruguay', 'UYU', 30.1649999999999991, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (110, 'Venezuela', 'VEF', 641.400099999999952, '2016-07-01');
+INSERT INTO public.exchange_rate VALUES (111, 'Vietnam', 'VND', 22300, '2016-07-01');
+
+
+--
+-- TOC entry 2849 (class 0 OID 17165)
+-- Dependencies: 197
+-- Data for Name: gender; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.gender VALUES (0, 'ARB', 194903052, 404024433, 0.482404122326928697);
+INSERT INTO public.gender VALUES (1, 'CSS', 3600425, 7269386, 0.495285984263320211);
+INSERT INTO public.gender VALUES (2, 'CEB', 53158816, 102994343, 0.516133356955342681);
+INSERT INTO public.gender VALUES (3, 'EAR', 1552972344, 3165142287, 0.490648509034943114);
+INSERT INTO public.gender VALUES (4, 'EAS', 1132824331, 2298514046, 0.492850732398787406);
+INSERT INTO public.gender VALUES (5, 'EAP', 1008507999, 2053116851, 0.491208280965007793);
+INSERT INTO public.gender VALUES (6, 'TEA', 995576139, 2027771091, 0.4909706738688287);
+INSERT INTO public.gender VALUES (7, 'EMU', 174256906, 340616924, 0.511592037041588732);
+INSERT INTO public.gender VALUES (8, 'ECS', 469177490, 911812364, 0.514554867343299138);
+INSERT INTO public.gender VALUES (9, 'ECA', 214735273, 413361214, 0.519485780782519169);
+INSERT INTO public.gender VALUES (10, 'TEC', 236465080, 455505650, 0.519126557486169538);
+INSERT INTO public.gender VALUES (11, 'EUU', 261367405, 511218529, 0.511263559854263416);
+INSERT INTO public.gender VALUES (12, 'FCS', 246546209, 493290951, 0.499798766833653096);
+INSERT INTO public.gender VALUES (13, 'HPC', 370341463, 738387254, 0.501554517624433371);
+INSERT INTO public.gender VALUES (14, 'HIC', 601955017, 1198350350, 0.502319723943836616);
+INSERT INTO public.gender VALUES (15, 'IBD', 2311922382, 4687686335, 0.493190503114155077);
+INSERT INTO public.gender VALUES (16, 'IBT', 3093721147, 6256138021, 0.494509733739136814);
+INSERT INTO public.gender VALUES (17, 'IDB', 262035966, 531399044, 0.493105828771494725);
+INSERT INTO public.gender VALUES (18, 'IDX', 519762799, 1037052642, 0.501192300130122059);
+INSERT INTO public.gender VALUES (19, 'IDA', 781798765, 1568451686, 0.498452564384568475);
+INSERT INTO public.gender VALUES (20, 'LTE', 1119649516, 2262158994, 0.494947313150704227);
+INSERT INTO public.gender VALUES (21, 'LCN', 319369624, 629240066, 0.507548138233142931);
+INSERT INTO public.gender VALUES (22, 'LAC', 303275184, 597399287, 0.507659099365480149);
+INSERT INTO public.gender VALUES (23, 'TLA', 311346564, 613258172, 0.507692482897724839);
+INSERT INTO public.gender VALUES (24, 'LDC', 484462913, 963511276, 0.502809801055198013);
+INSERT INTO public.gender VALUES (25, 'LMY', 3078957151, 6227752871, 0.494392955978936677);
+INSERT INTO public.gender VALUES (26, 'LIC', 337468975, 670117389, 0.503596803395292891);
+INSERT INTO public.gender VALUES (27, 'LMC', 1440594833, 2939830821, 0.49002644053849792);
+INSERT INTO public.gender VALUES (28, 'MEA', 209196690, 433597626, 0.482467332512563074);
+INSERT INTO public.gender VALUES (29, 'MNA', 183589392, 370276461, 0.495817075447310185);
+INSERT INTO public.gender VALUES (30, 'TMN', 181438057, 365909373, 0.495855177232642275);
+INSERT INTO public.gender VALUES (31, 'MIC', 2741488176, 5557635482, 0.493283192983616392);
+INSERT INTO public.gender VALUES (32, 'NAC', 181448726, 359245384, 0.505082971365332867);
+INSERT INTO public.gender VALUES (33, 'OED', 655182391, 1288747101, 0.508387091999363494);
+INSERT INTO public.gender VALUES (34, 'OSS', 13883508, 29542879, 0.469944313822630522);
+INSERT INTO public.gender VALUES (35, 'PSS', 1127092, 2388307, 0.471920904640818817);
+INSERT INTO public.gender VALUES (36, 'PST', 561292986, 1101992071, 0.509343942457458954);
+INSERT INTO public.gender VALUES (37, 'PRE', 434944788, 869943914, 0.499968769251025513);
+INSERT INTO public.gender VALUES (38, 'SST', 18611025, 39200572, 0.474764118237866517);
+INSERT INTO public.gender VALUES (39, 'SAS', 856232039, 1771167194, 0.483428126887494813);
+INSERT INTO public.gender VALUES (40, 'TSA', 856232039, 1771167194, 0.483428126887494813);
+INSERT INTO public.gender VALUES (41, 'SSF', 512663268, 1022526541, 0.501369155169929193);
+INSERT INTO public.gender VALUES (42, 'SSA', 512617264, 1022431864, 0.50137058717489269);
+INSERT INTO public.gender VALUES (43, 'TSS', 512663268, 1022526541, 0.501369155169929193);
+INSERT INTO public.gender VALUES (44, 'UMC', 1300893343, 2617804661, 0.496940570998547881);
+INSERT INTO public.gender VALUES (45, 'WLD', 3680912168, 7426103221, 0.495672098603596789);
+INSERT INTO public.gender VALUES (46, 'AFG', 17196083, 35383128, 0.485996687460758081);
+INSERT INTO public.gender VALUES (47, 'ALB', 1410814, 2876101, 0.490530061357372427);
+INSERT INTO public.gender VALUES (48, 'DZA', 20069500, 40551404, 0.494915046591235197);
+INSERT INTO public.gender VALUES (49, 'AGO', 14576128, 28842484, 0.505370064520101692);
+INSERT INTO public.gender VALUES (50, 'ATG', 49006, 94527, 0.518433886614406481);
+INSERT INTO public.gender VALUES (51, 'ARG', 22344847, 43590368, 0.512609735251604248);
+INSERT INTO public.gender VALUES (52, 'ARM', 1555132, 2936146, 0.529650773496958216);
+INSERT INTO public.gender VALUES (53, 'ABW', 55048, 104872, 0.524906552750019073);
+INSERT INTO public.gender VALUES (54, 'AUS', 12141288, 24190907, 0.501894699524908283);
+INSERT INTO public.gender VALUES (55, 'AUT', 4453787, 8736668, 0.509780959972383041);
+INSERT INTO public.gender VALUES (56, 'AZE', 4898038, 9757812, 0.501960685448746058);
+INSERT INTO public.gender VALUES (57, 'BHS', 194450, 377931, 0.514511908258385775);
+INSERT INTO public.gender VALUES (58, 'BHR', 538854, 1425791, 0.377933371721381306);
+INSERT INTO public.gender VALUES (59, 'BGD', 77925128, 157970840, 0.493288052402582611);
+INSERT INTO public.gender VALUES (60, 'BRB', 147895, 285796, 0.517484499433162104);
+INSERT INTO public.gender VALUES (61, 'BLR', 5079571, 9501534, 0.534605359513527056);
+INSERT INTO public.gender VALUES (62, 'BEL', 5753945, 11331422, 0.50778666613951895);
+INSERT INTO public.gender VALUES (63, 'BLZ', 184648, 368400, 0.501216069489685112);
+INSERT INTO public.gender VALUES (64, 'BEN', 5451500, 10872067, 0.501422590570863802);
+INSERT INTO public.gender VALUES (65, 'BTN', 347497, 736709, 0.471688278546888995);
+INSERT INTO public.gender VALUES (66, 'BOL', 5488501, 11031813, 0.497515775512148373);
+INSERT INTO public.gender VALUES (67, 'BIH', 1726542, 3386267, 0.509865878857160393);
+INSERT INTO public.gender VALUES (68, 'BWA', 1120221, 2159944, 0.518634279407243937);
+INSERT INTO public.gender VALUES (69, 'BRA', 104712865, 206163058, 0.507912843434831118);
+INSERT INTO public.gender VALUES (70, 'BRN', 201419, 419800, 0.479797522629823725);
+INSERT INTO public.gender VALUES (71, 'BGR', 3662344, 7127822, 0.513809688289073474);
+INSERT INTO public.gender VALUES (72, 'BFA', 9353849, 18646378, 0.501644287163973579);
+INSERT INTO public.gender VALUES (73, 'BDI', 5292743, 10487998, 0.504647598140274267);
+INSERT INTO public.gender VALUES (74, 'CPV', 264794, 531146, 0.498533359942464005);
+INSERT INTO public.gender VALUES (75, 'KHM', 8075001, 15766293, 0.512168649916629137);
+INSERT INTO public.gender VALUES (76, 'CMR', 11969331, 23926539, 0.500253337935754105);
+INSERT INTO public.gender VALUES (77, 'CAN', 18202997, 36109487, 0.504105666192377622);
+INSERT INTO public.gender VALUES (78, 'CAF', 2288849, 4537687, 0.504408743926145653);
+INSERT INTO public.gender VALUES (79, 'TCD', 7294427, 14561666, 0.500933547026830572);
+INSERT INTO public.gender VALUES (80, 'CHI', 84409, 166923, 0.505676269896898622);
+INSERT INTO public.gender VALUES (81, 'CHL', 9243812, 18209068, 0.507648826397924413);
+INSERT INTO public.gender VALUES (82, 'CHN', 670780903, 1378665000, 0.486543796353719027);
+INSERT INTO public.gender VALUES (83, 'COL', 24555030, 48171392, 0.509743002651864452);
+INSERT INTO public.gender VALUES (84, 'COM', 394321, 795592, 0.495632183330149079);
+INSERT INTO public.gender VALUES (85, 'COD', 39489785, 78789127, 0.50120856143005621);
+INSERT INTO public.gender VALUES (86, 'COG', 2495203, 4980999, 0.500944288485101086);
+INSERT INTO public.gender VALUES (87, 'CRI', 2448701, 4899345, 0.499801708187522953);
+INSERT INTO public.gender VALUES (88, 'CIV', 11781680, 23822714, 0.494556581588478983);
+INSERT INTO public.gender VALUES (89, 'HRV', 2166691, 4174349, 0.519048838513502364);
+INSERT INTO public.gender VALUES (90, 'CUB', 5703179, 11335109, 0.503142845825302554);
+INSERT INTO public.gender VALUES (91, 'CUW', 86480, 159664, 0.541637438621104361);
+INSERT INTO public.gender VALUES (92, 'CYP', 584158, 1170187, 0.499200555124950096);
+INSERT INTO public.gender VALUES (93, 'CZE', 5373114, 10566332, 0.508512698635628757);
+INSERT INTO public.gender VALUES (94, 'DNK', 2879322, 5728010, 0.502674052594181964);
+INSERT INTO public.gender VALUES (95, 'DJI', 438938, 929112, 0.472427436089513375);
+INSERT INTO public.gender VALUES (96, 'DOM', 5194800, 10397743, 0.499608424636000414);
+INSERT INTO public.gender VALUES (97, 'ECU', 8237882, 16491115, 0.499534567553497677);
+INSERT INTO public.gender VALUES (98, 'EGY', 46717301, 94447072, 0.494640013827003622);
+INSERT INTO public.gender VALUES (99, 'SLV', 3370450, 6356143, 0.530266546866551058);
+INSERT INTO public.gender VALUES (100, 'GNQ', 542110, 1215179, 0.446115345969606114);
+INSERT INTO public.gender VALUES (101, 'EST', 698980, 1315790, 0.531224587510164992);
+INSERT INTO public.gender VALUES (102, 'SWZ', 574392, 1113984, 0.515619613926232345);
+INSERT INTO public.gender VALUES (103, 'ETH', 51797624, 103603501, 0.499960170264902526);
+INSERT INTO public.gender VALUES (104, 'FJI', 429490, 872399, 0.492309138364441012);
+INSERT INTO public.gender VALUES (105, 'FIN', 2789446, 5495303, 0.507605495092809278);
+INSERT INTO public.gender VALUES (106, 'FRA', 34469116, 66859768, 0.515543458062851734);
+INSERT INTO public.gender VALUES (107, 'PYF', 135302, 274575, 0.492768824547027307);
+INSERT INTO public.gender VALUES (108, 'GAB', 985069, 2007873, 0.490603240344384406);
+INSERT INTO public.gender VALUES (109, 'GMB', 1083109, 2149139, 0.503973451693911056);
+INSERT INTO public.gender VALUES (110, 'GEO', 1947584, 3727505, 0.522489976539266876);
+INSERT INTO public.gender VALUES (111, 'DEU', 41808130, 82348669, 0.507696487480568726);
+INSERT INTO public.gender VALUES (112, 'GHA', 14053716, 28481946, 0.493425414120229056);
+INSERT INTO public.gender VALUES (113, 'GRC', 5486068, 10775971, 0.509101963990066464);
+INSERT INTO public.gender VALUES (114, 'GRD', 54664, 110261, 0.495769129610651116);
+INSERT INTO public.gender VALUES (115, 'GUM', 80539, 162951, 0.494252873563218398);
+INSERT INTO public.gender VALUES (116, 'GTM', 8422789, 16583060, 0.50791524604023619);
+INSERT INTO public.gender VALUES (117, 'GIN', 6106631, 11738441, 0.520225045216822224);
+INSERT INTO public.gender VALUES (118, 'GNB', 913704, 1782437, 0.512615032116142122);
+INSERT INTO public.gender VALUES (119, 'GUY', 385102, 771366, 0.499246790758213377);
+INSERT INTO public.gender VALUES (120, 'HTI', 5489352, 10839970, 0.506399187451625821);
+INSERT INTO public.gender VALUES (121, 'HND', 4641498, 9270795, 0.500658034181534539);
+INSERT INTO public.gender VALUES (122, 'HKG', 3941508, 7336600, 0.537239048060409452);
+INSERT INTO public.gender VALUES (123, 'HUN', 5148625, 9814023, 0.524619210694737492);
+INSERT INTO public.gender VALUES (124, 'ISL', 167175, 335439, 0.49837675404469961);
+INSERT INTO public.gender VALUES (125, 'IND', 635908885, 1324509589, 0.480108932605092686);
+INSERT INTO public.gender VALUES (126, 'IDN', 129834450, 261554226, 0.496395917533368425);
+INSERT INTO public.gender VALUES (127, 'IRN', 39289469, 79564016, 0.493809525652903203);
+INSERT INTO public.gender VALUES (128, 'IRQ', 18097667, 36610632, 0.494328177672540614);
+INSERT INTO public.gender VALUES (129, 'IRL', 2401335, 4755335, 0.504977041575409569);
+INSERT INTO public.gender VALUES (130, 'ISR', 4304840, 8546000, 0.50372571963491708);
+INSERT INTO public.gender VALUES (131, 'ITA', 31188515, 60627498, 0.514428535381750374);
+INSERT INTO public.gender VALUES (132, 'JAM', 1462323, 2906238, 0.503166980818501419);
+INSERT INTO public.gender VALUES (133, 'JPN', 64951468, 126994511, 0.511450987043054139);
+INSERT INTO public.gender VALUES (134, 'JOR', 4716161, 9551467, 0.493762999966392613);
+INSERT INTO public.gender VALUES (135, 'KAZ', 9174836, 17794055, 0.515612433478484844);
+INSERT INTO public.gender VALUES (136, 'KEN', 24684358, 49051686, 0.503231591264773237);
+INSERT INTO public.gender VALUES (137, 'KIR', 57248, 112524, 0.508762575095090819);
+INSERT INTO public.gender VALUES (138, 'PRK', 12931860, 25307744, 0.510984305831448271);
+INSERT INTO public.gender VALUES (139, 'KOR', 25570550, 51245707, 0.498979358407524776);
+INSERT INTO public.gender VALUES (140, 'KWT', 1610205, 3956873, 0.40693876199716289);
+INSERT INTO public.gender VALUES (141, 'KGZ', 3071223, 6079500, 0.505176905995558867);
+INSERT INTO public.gender VALUES (142, 'LAO', 3409177, 6845846, 0.497992067014069617);
+INSERT INTO public.gender VALUES (143, 'LVA', 1060500, 1959537, 0.541199273093593058);
+INSERT INTO public.gender VALUES (144, 'LBN', 3335564, 6711121, 0.497020393463327492);
+INSERT INTO public.gender VALUES (145, 'LSO', 1053876, 2075001, 0.50789180342563689);
+INSERT INTO public.gender VALUES (146, 'LBR', 2284705, 4586788, 0.498105646042503014);
+INSERT INTO public.gender VALUES (147, 'LBY', 3209345, 6492164, 0.494341332104364595);
+INSERT INTO public.gender VALUES (148, 'LTU', 1546111, 2868231, 0.539046889877419222);
+INSERT INTO public.gender VALUES (149, 'LUX', 289340, 582014, 0.497135807729710888);
+INSERT INTO public.gender VALUES (150, 'MAC', 318795, 612836, 0.520196267843272886);
+INSERT INTO public.gender VALUES (151, 'MDG', 12481486, 24894380, 0.501377660339401898);
+INSERT INTO public.gender VALUES (152, 'MWI', 8726589, 17205289, 0.50720386039432408);
+INSERT INTO public.gender VALUES (153, 'MYS', 14894008, 30684804, 0.485387099099606423);
+INSERT INTO public.gender VALUES (154, 'MDV', 186570, 475513, 0.392355203748372794);
+INSERT INTO public.gender VALUES (155, 'MLI', 8979106, 17965429, 0.499799142007686048);
+INSERT INTO public.gender VALUES (156, 'MLT', 227271, 455356, 0.499106193835153089);
+INSERT INTO public.gender VALUES (157, 'MRT', 2076283, 4163534, 0.498682849713728782);
+INSERT INTO public.gender VALUES (158, 'MUS', 638052, 1263473, 0.504998523909889641);
+INSERT INTO public.gender VALUES (159, 'MEX', 63018018, 123333376, 0.510956725939294865);
+INSERT INTO public.gender VALUES (160, 'FSM', 54189, 110215, 0.491666288617701785);
+INSERT INTO public.gender VALUES (161, 'MDA', 1845895, 3551954, 0.519684376543164683);
+INSERT INTO public.gender VALUES (162, 'MNG', 1546659, 3056359, 0.506046246530594046);
+INSERT INTO public.gender VALUES (163, 'MNE', 314666, 622303, 0.505647570395771795);
+INSERT INTO public.gender VALUES (164, 'MAR', 17715802, 35126296, 0.504345861003961282);
+INSERT INTO public.gender VALUES (165, 'MOZ', 14346175, 27829942, 0.515494247167313513);
+INSERT INTO public.gender VALUES (166, 'MMR', 27478842, 53045226, 0.518026674068652326);
+INSERT INTO public.gender VALUES (167, 'NAM', 1216361, 2358041, 0.515835390478791456);
+INSERT INTO public.gender VALUES (168, 'NPL', 14838723, 27261131, 0.544317952178873243);
+INSERT INTO public.gender VALUES (169, 'NLD', 8560955, 17030314, 0.502689204673501644);
+INSERT INTO public.gender VALUES (170, 'NCL', 137160, 276550, 0.495968179352739125);
+INSERT INTO public.gender VALUES (171, 'NZL', 2385498, 4693200, 0.508288161595499832);
+INSERT INTO public.gender VALUES (172, 'NIC', 3196842, 6303974, 0.507115352950377019);
+INSERT INTO public.gender VALUES (173, 'NER', 10358212, 20788838, 0.498258344213370674);
+INSERT INTO public.gender VALUES (174, 'NGA', 91778884, 185960289, 0.493540231054383882);
+INSERT INTO public.gender VALUES (175, 'MKD', 1039568, 2080745, 0.499613359638014287);
+INSERT INTO public.gender VALUES (176, 'NOR', 2596542, 5234519, 0.496042138733281901);
+INSERT INTO public.gender VALUES (177, 'OMN', 1539788, 4479219, 0.343762606829449535);
+INSERT INTO public.gender VALUES (178, 'PAK', 98831965, 203627284, 0.485357183274123527);
+INSERT INTO public.gender VALUES (179, 'PAN', 2013132, 4037078, 0.498660664966096789);
+INSERT INTO public.gender VALUES (180, 'PNG', 4052302, 8271760, 0.489895983442459715);
+INSERT INTO public.gender VALUES (181, 'PRY', 3329473, 6777872, 0.491226892452380326);
+INSERT INTO public.gender VALUES (182, 'PER', 15570373, 30926032, 0.503471412045360389);
+INSERT INTO public.gender VALUES (183, 'PHL', 51520528, 103663927, 0.496995719639291678);
+INSERT INTO public.gender VALUES (184, 'POL', 19563116, 37970087, 0.515224418632488246);
+INSERT INTO public.gender VALUES (185, 'PRT', 5440467, 10325452, 0.526898677171711238);
+INSERT INTO public.gender VALUES (186, 'PRI', 1779702, 3406495, 0.52244374349588063);
+INSERT INTO public.gender VALUES (187, 'QAT', 641458, 2654374, 0.241660745622131662);
+INSERT INTO public.gender VALUES (188, 'ROU', 10110191, 19702332, 0.513146920882258883);
+INSERT INTO public.gender VALUES (189, 'RUS', 77468056, 144342396, 0.536696481053286711);
+INSERT INTO public.gender VALUES (190, 'RWA', 5937443, 11668818, 0.508829857488564796);
+INSERT INTO public.gender VALUES (191, 'WSM', 93932, 194535, 0.482853985144061526);
+INSERT INTO public.gender VALUES (192, 'STP', 101558, 203227, 0.499726906365787982);
+INSERT INTO public.gender VALUES (193, 'SAU', 13921739, 32442572, 0.429119460688875076);
+INSERT INTO public.gender VALUES (194, 'SEN', 7698908, 14993528, 0.513482083736396144);
+INSERT INTO public.gender VALUES (195, 'SRB', 3598916, 7058322, 0.509882660496361551);
+INSERT INTO public.gender VALUES (196, 'SYC', 46004, 94677, 0.485904707584735474);
+INSERT INTO public.gender VALUES (197, 'SLE', 3675665, 7328838, 0.501534486094521448);
+INSERT INTO public.gender VALUES (198, 'SGP', 2672718, 5607283, 0.476651169559303478);
+INSERT INTO public.gender VALUES (199, 'SVK', 2790667, 5430798, 0.513859473322336835);
+INSERT INTO public.gender VALUES (200, 'SVN', 1038477, 2065042, 0.502884202839457894);
+INSERT INTO public.gender VALUES (201, 'SLB', 304526, 619437, 0.491617388047533521);
+INSERT INTO public.gender VALUES (202, 'SOM', 7110131, 14185613, 0.501221272566789944);
+INSERT INTO public.gender VALUES (203, 'ZAF', 28469912, 56203654, 0.506549129350202021);
+INSERT INTO public.gender VALUES (204, 'SSD', 5412863, 10832512, 0.499686776252821208);
+INSERT INTO public.gender VALUES (205, 'ESP', 23669638, 46483569, 0.509204402957956992);
+INSERT INTO public.gender VALUES (206, 'LKA', 10997188, 21203000, 0.518661887468754412);
+INSERT INTO public.gender VALUES (207, 'LCA', 91371, 180024, 0.507548993467537679);
+INSERT INTO public.gender VALUES (208, 'VCT', 53754, 109459, 0.491087987282909588);
+INSERT INTO public.gender VALUES (209, 'SDN', 19947207, 39847440, 0.500589423059549121);
+INSERT INTO public.gender VALUES (210, 'SUR', 280735, 564888, 0.496974621517893789);
+INSERT INTO public.gender VALUES (211, 'SWE', 4960573, 9923085, 0.499902298529136924);
+INSERT INTO public.gender VALUES (212, 'CHE', 4226492, 8373338, 0.504755928878065085);
+INSERT INTO public.gender VALUES (213, 'SYR', 8670185, 17453933, 0.496746779078388823);
+INSERT INTO public.gender VALUES (214, 'TJK', 4293444, 8663579, 0.495573942362619424);
+INSERT INTO public.gender VALUES (215, 'TZA', 26566306, 53050790, 0.500771166649921717);
+INSERT INTO public.gender VALUES (216, 'THA', 35310921, 68971331, 0.511965196089952168);
+INSERT INTO public.gender VALUES (217, 'TLS', 602951, 1219288, 0.494510730852759983);
+INSERT INTO public.gender VALUES (218, 'TGO', 3777354, 7509952, 0.502979779364768231);
+INSERT INTO public.gender VALUES (219, 'TON', 50584, 101133, 0.500173039462885494);
+INSERT INTO public.gender VALUES (220, 'TTO', 696477, 1377564, 0.505585947367962585);
+INSERT INTO public.gender VALUES (221, 'TUN', 5702823, 11303946, 0.504498429132623216);
+INSERT INTO public.gender VALUES (222, 'TUR', 40511232, 79821724, 0.50752138603270458);
+INSERT INTO public.gender VALUES (223, 'TKM', 2874285, 5662372, 0.507611474484544689);
+INSERT INTO public.gender VALUES (224, 'UGA', 20160911, 39647506, 0.508503889248418273);
+INSERT INTO public.gender VALUES (225, 'UKR', 24174750, 45004645, 0.537161219691878467);
+INSERT INTO public.gender VALUES (226, 'ARE', 2823143, 9360980, 0.301586265540573717);
+INSERT INTO public.gender VALUES (227, 'GBR', 33246523, 65595565, 0.50684101890120159);
+INSERT INTO public.gender VALUES (228, 'USA', 163245729, 323071342, 0.505293128104194356);
+INSERT INTO public.gender VALUES (229, 'URY', 1772132, 3424132, 0.517541963919615267);
+INSERT INTO public.gender VALUES (230, 'UZB', 15978186, 31847900, 0.501702969426555567);
+INSERT INTO public.gender VALUES (231, 'VUT', 137123, 278330, 0.492663385190241776);
+INSERT INTO public.gender VALUES (232, 'VEN', 15037987, 29846179, 0.503849655260728668);
+INSERT INTO public.gender VALUES (233, 'VNM', 46943305, 93638724, 0.501323629741046051);
+INSERT INTO public.gender VALUES (234, 'VIR', 56306, 107510, 0.523728025299972089);
+INSERT INTO public.gender VALUES (235, 'PSE', 2151335, 4367088, 0.492624604770959484);
+INSERT INTO public.gender VALUES (236, 'YEM', 13475302, 27168210, 0.495995209106525614);
+INSERT INTO public.gender VALUES (237, 'ZMB', 8264715, 16363507, 0.505069909524895833);
+INSERT INTO public.gender VALUES (238, 'ZWE', 7356159, 14030390, 0.524301819122633073);
+
+
+--
+-- TOC entry 2850 (class 0 OID 17172)
+-- Dependencies: 198
+-- Data for Name: happy; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.happy VALUES (0, 'Denmark', 7.5259999999999998);
+INSERT INTO public.happy VALUES (1, 'Switzerland', 7.50899999999999856);
+INSERT INTO public.happy VALUES (2, 'Iceland', 7.50100000000000033);
+INSERT INTO public.happy VALUES (3, 'Norway', 7.49799999999999844);
+INSERT INTO public.happy VALUES (4, 'Finland', 7.41299999999999848);
+INSERT INTO public.happy VALUES (5, 'Canada', 7.40399999999999991);
+INSERT INTO public.happy VALUES (6, 'Netherlands', 7.33899999999999864);
+INSERT INTO public.happy VALUES (7, 'New Zealand', 7.33399999999999963);
+INSERT INTO public.happy VALUES (8, 'Australia', 7.31299999999999972);
+INSERT INTO public.happy VALUES (9, 'Sweden', 7.29100000000000037);
+INSERT INTO public.happy VALUES (10, 'Israel', 7.26700000000000035);
+INSERT INTO public.happy VALUES (11, 'Austria', 7.11899999999999977);
+INSERT INTO public.happy VALUES (12, 'United States', 7.10400000000000009);
+INSERT INTO public.happy VALUES (13, 'Costa Rica', 7.08700000000000152);
+INSERT INTO public.happy VALUES (14, 'Puerto Rico', 7.0389999999999997);
+INSERT INTO public.happy VALUES (15, 'Germany', 6.99399999999999977);
+INSERT INTO public.happy VALUES (16, 'Brazil', 6.95200000000000085);
+INSERT INTO public.happy VALUES (17, 'Belgium', 6.92899999999999849);
+INSERT INTO public.happy VALUES (18, 'Ireland', 6.90700000000000003);
+INSERT INTO public.happy VALUES (19, 'Luxembourg', 6.87100000000000044);
+INSERT INTO public.happy VALUES (20, 'Mexico', 6.77799999999999958);
+INSERT INTO public.happy VALUES (21, 'Singapore', 6.73899999999999988);
+INSERT INTO public.happy VALUES (22, 'United Kingdom', 6.72499999999999964);
+INSERT INTO public.happy VALUES (23, 'Chile', 6.70500000000000007);
+INSERT INTO public.happy VALUES (24, 'Panama', 6.70100000000000051);
+INSERT INTO public.happy VALUES (25, 'Argentina', 6.65000000000000036);
+INSERT INTO public.happy VALUES (26, 'Czech Republic', 6.59600000000000009);
+INSERT INTO public.happy VALUES (27, 'United Arab Emirates', 6.5730000000000004);
+INSERT INTO public.happy VALUES (28, 'Uruguay', 6.54499999999999993);
+INSERT INTO public.happy VALUES (29, 'Malta', 6.48800000000000043);
+INSERT INTO public.happy VALUES (30, 'Colombia', 6.48099999999999987);
+INSERT INTO public.happy VALUES (31, 'France', 6.47799999999999976);
+INSERT INTO public.happy VALUES (32, 'Thailand', 6.4740000000000002);
+INSERT INTO public.happy VALUES (33, 'Saudi Arabia', 6.37899999999999956);
+INSERT INTO public.happy VALUES (34, 'Taiwan', 6.37899999999999956);
+INSERT INTO public.happy VALUES (35, 'Qatar', 6.375);
+INSERT INTO public.happy VALUES (36, 'Spain', 6.36100000000000154);
+INSERT INTO public.happy VALUES (37, 'Algeria', 6.35500000000000043);
+INSERT INTO public.happy VALUES (38, 'Guatemala', 6.32399999999999984);
+INSERT INTO public.happy VALUES (39, 'Suriname', 6.26900000000000013);
+INSERT INTO public.happy VALUES (40, 'Kuwait', 6.23899999999999988);
+INSERT INTO public.happy VALUES (41, 'Bahrain', 6.21799999999999997);
+INSERT INTO public.happy VALUES (42, 'Trinidad and Tobago', 6.16799999999999837);
+INSERT INTO public.happy VALUES (43, 'Venezuela', 6.08399999999999963);
+INSERT INTO public.happy VALUES (44, 'Slovakia', 6.07799999999999851);
+INSERT INTO public.happy VALUES (45, 'El Salvador', 6.06799999999999962);
+INSERT INTO public.happy VALUES (46, 'Malaysia', 6.00499999999999989);
+INSERT INTO public.happy VALUES (47, 'Nicaragua', 5.99200000000000088);
+INSERT INTO public.happy VALUES (48, 'Uzbekistan', 5.9870000000000001);
+INSERT INTO public.happy VALUES (49, 'Italy', 5.97700000000000031);
+INSERT INTO public.happy VALUES (50, 'Ecuador', 5.97599999999999998);
+INSERT INTO public.happy VALUES (51, 'Belize', 5.95600000000000041);
+INSERT INTO public.happy VALUES (52, 'Japan', 5.92100000000000026);
+INSERT INTO public.happy VALUES (53, 'Kazakhstan', 5.91899999999999959);
+INSERT INTO public.happy VALUES (54, 'Moldova', 5.89700000000000024);
+INSERT INTO public.happy VALUES (55, 'Russia', 5.85599999999999987);
+INSERT INTO public.happy VALUES (56, 'Poland', 5.83499999999999996);
+INSERT INTO public.happy VALUES (57, 'South Korea', 5.83499999999999996);
+INSERT INTO public.happy VALUES (58, 'Bolivia', 5.82200000000000006);
+INSERT INTO public.happy VALUES (59, 'Lithuania', 5.81299999999999972);
+INSERT INTO public.happy VALUES (60, 'Belarus', 5.80200000000000049);
+INSERT INTO public.happy VALUES (61, 'North Cyprus', 5.77099999999999991);
+INSERT INTO public.happy VALUES (62, 'Slovenia', 5.76799999999999979);
+INSERT INTO public.happy VALUES (63, 'Peru', 5.74299999999999855);
+INSERT INTO public.happy VALUES (64, 'Turkmenistan', 5.65800000000000036);
+INSERT INTO public.happy VALUES (65, 'Mauritius', 5.64799999999999969);
+INSERT INTO public.happy VALUES (66, 'Libya', 5.61500000000000021);
+INSERT INTO public.happy VALUES (67, 'Latvia', 5.55999999999999961);
+INSERT INTO public.happy VALUES (68, 'Cyprus', 5.54600000000000026);
+INSERT INTO public.happy VALUES (69, 'Paraguay', 5.53799999999999848);
+INSERT INTO public.happy VALUES (70, 'Romania', 5.52799999999999958);
+INSERT INTO public.happy VALUES (71, 'Estonia', 5.51700000000000035);
+INSERT INTO public.happy VALUES (72, 'Jamaica', 5.50999999999999979);
+INSERT INTO public.happy VALUES (73, 'Croatia', 5.48800000000000043);
+INSERT INTO public.happy VALUES (74, 'Hong Kong', 5.45799999999999841);
+INSERT INTO public.happy VALUES (75, 'Somalia', 5.44000000000000039);
+INSERT INTO public.happy VALUES (76, 'Kosovo', 5.4009999999999998);
+INSERT INTO public.happy VALUES (77, 'Turkey', 5.38899999999999846);
+INSERT INTO public.happy VALUES (78, 'Indonesia', 5.31400000000000006);
+INSERT INTO public.happy VALUES (79, 'Jordan', 5.30299999999999994);
+INSERT INTO public.happy VALUES (80, 'Azerbaijan', 5.29100000000000037);
+INSERT INTO public.happy VALUES (81, 'Philippines', 5.27899999999999991);
+INSERT INTO public.happy VALUES (82, 'China', 5.24500000000000011);
+INSERT INTO public.happy VALUES (83, 'Bhutan', 5.19600000000000151);
+INSERT INTO public.happy VALUES (84, 'Kyrgyzstan', 5.18499999999999961);
+INSERT INTO public.happy VALUES (85, 'Serbia', 5.17700000000000049);
+INSERT INTO public.happy VALUES (86, 'Bosnia and Herzegovina', 5.16299999999999848);
+INSERT INTO public.happy VALUES (87, 'Montenegro', 5.16100000000000048);
+INSERT INTO public.happy VALUES (88, 'Dominican Republic', 5.15500000000000025);
+INSERT INTO public.happy VALUES (89, 'Morocco', 5.1509999999999998);
+INSERT INTO public.happy VALUES (90, 'Hungary', 5.14499999999999957);
+INSERT INTO public.happy VALUES (91, 'Pakistan', 5.13200000000000145);
+INSERT INTO public.happy VALUES (92, 'Lebanon', 5.12899999999999956);
+INSERT INTO public.happy VALUES (93, 'Portugal', 5.12299999999999844);
+INSERT INTO public.happy VALUES (94, 'Macedonia', 5.12100000000000044);
+INSERT INTO public.happy VALUES (95, 'Vietnam', 5.06099999999999994);
+INSERT INTO public.happy VALUES (96, 'Somaliland Region', 5.05700000000000038);
+INSERT INTO public.happy VALUES (97, 'Tunisia', 5.04499999999999993);
+INSERT INTO public.happy VALUES (98, 'Greece', 5.03300000000000036);
+INSERT INTO public.happy VALUES (99, 'Tajikistan', 4.99600000000000044);
+INSERT INTO public.happy VALUES (100, 'Mongolia', 4.90700000000000003);
+INSERT INTO public.happy VALUES (101, 'Laos', 4.87600000000000033);
+INSERT INTO public.happy VALUES (102, 'Nigeria', 4.875);
+INSERT INTO public.happy VALUES (103, 'Honduras', 4.87100000000000044);
+INSERT INTO public.happy VALUES (104, 'Iran', 4.81299999999999972);
+INSERT INTO public.happy VALUES (105, 'Zambia', 4.79499999999999993);
+INSERT INTO public.happy VALUES (106, 'Nepal', 4.79300000000000015);
+INSERT INTO public.happy VALUES (107, 'Palestinian Territories', 4.75399999999999956);
+INSERT INTO public.happy VALUES (108, 'Albania', 4.65500000000000025);
+INSERT INTO public.happy VALUES (109, 'Bangladesh', 4.64299999999999979);
+INSERT INTO public.happy VALUES (110, 'Sierra Leone', 4.63499999999999979);
+INSERT INTO public.happy VALUES (111, 'Iraq', 4.57500000000000018);
+INSERT INTO public.happy VALUES (112, 'Namibia', 4.57399999999999984);
+INSERT INTO public.happy VALUES (113, 'Cameroon', 4.5129999999999999);
+INSERT INTO public.happy VALUES (114, 'Ethiopia', 4.50800000000000001);
+INSERT INTO public.happy VALUES (115, 'South Africa', 4.45899999999999963);
+INSERT INTO public.happy VALUES (116, 'Sri Lanka', 4.41500000000000004);
+INSERT INTO public.happy VALUES (117, 'India', 4.40399999999999991);
+INSERT INTO public.happy VALUES (118, 'Myanmar', 4.39499999999999957);
+INSERT INTO public.happy VALUES (119, 'Egypt', 4.3620000000000001);
+INSERT INTO public.happy VALUES (120, 'Armenia', 4.36000000000000032);
+INSERT INTO public.happy VALUES (121, 'Kenya', 4.35599999999999987);
+INSERT INTO public.happy VALUES (122, 'Ukraine', 4.32399999999999984);
+INSERT INTO public.happy VALUES (123, 'Ghana', 4.2759999999999998);
+INSERT INTO public.happy VALUES (124, 'Congo (Kinshasa)', 4.27200000000000024);
+INSERT INTO public.happy VALUES (125, 'Georgia', 4.25199999999999978);
+INSERT INTO public.happy VALUES (126, 'Congo (Brazzaville)', 4.23600000000000154);
+INSERT INTO public.happy VALUES (127, 'Senegal', 4.21899999999999853);
+INSERT INTO public.happy VALUES (128, 'Bulgaria', 4.21699999999999964);
+INSERT INTO public.happy VALUES (129, 'Mauritania', 4.20100000000000051);
+INSERT INTO public.happy VALUES (130, 'Zimbabwe', 4.1930000000000005);
+INSERT INTO public.happy VALUES (131, 'Malawi', 4.15600000000000147);
+INSERT INTO public.happy VALUES (132, 'Sudan', 4.13899999999999846);
+INSERT INTO public.happy VALUES (133, 'Gabon', 4.12100000000000044);
+INSERT INTO public.happy VALUES (134, 'Mali', 4.0730000000000004);
+INSERT INTO public.happy VALUES (135, 'Haiti', 4.02800000000000047);
+INSERT INTO public.happy VALUES (136, 'Botswana', 3.9740000000000002);
+INSERT INTO public.happy VALUES (137, 'Comoros', 3.95599999999999996);
+INSERT INTO public.happy VALUES (138, 'Ivory Coast', 3.91599999999999993);
+INSERT INTO public.happy VALUES (139, 'Cambodia', 3.90700000000000003);
+INSERT INTO public.happy VALUES (140, 'Angola', 3.8660000000000001);
+INSERT INTO public.happy VALUES (141, 'Niger', 3.85599999999999987);
+INSERT INTO public.happy VALUES (142, 'South Sudan', 3.83199999999999985);
+INSERT INTO public.happy VALUES (143, 'Chad', 3.7629999999999999);
+INSERT INTO public.happy VALUES (144, 'Burkina Faso', 3.73899999999999988);
+INSERT INTO public.happy VALUES (145, 'Uganda', 3.73899999999999988);
+INSERT INTO public.happy VALUES (146, 'Yemen', 3.7240000000000002);
+INSERT INTO public.happy VALUES (147, 'Madagascar', 3.69499999999999984);
+INSERT INTO public.happy VALUES (148, 'Tanzania', 3.66599999999999993);
+INSERT INTO public.happy VALUES (149, 'Liberia', 3.62199999999999989);
+INSERT INTO public.happy VALUES (150, 'Guinea', 3.60700000000000021);
+INSERT INTO public.happy VALUES (151, 'Rwanda', 3.51500000000000012);
+INSERT INTO public.happy VALUES (152, 'Benin', 3.48399999999999999);
+INSERT INTO public.happy VALUES (153, 'Afghanistan', 3.35999999999999988);
+INSERT INTO public.happy VALUES (154, 'Togo', 3.30299999999999994);
+INSERT INTO public.happy VALUES (155, 'Syria', 3.06899999999999995);
+INSERT INTO public.happy VALUES (156, 'Burundi', 2.9049999999999998);
+
+
+--
+-- TOC entry 2853 (class 0 OID 17193)
+-- Dependencies: 201
+-- Data for Name: liquor; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.liquor VALUES (0, 'Denmark', 81);
+INSERT INTO public.liquor VALUES (1, 'Switzerland', 100);
+INSERT INTO public.liquor VALUES (2, 'Iceland', 61);
+INSERT INTO public.liquor VALUES (3, 'Norway', 71);
+INSERT INTO public.liquor VALUES (4, 'Finland', 133);
+INSERT INTO public.liquor VALUES (5, 'Canada', 122);
+INSERT INTO public.liquor VALUES (6, 'Netherlands', 88);
+INSERT INTO public.liquor VALUES (7, 'New Zealand', 79);
+INSERT INTO public.liquor VALUES (8, 'Australia', 72);
+INSERT INTO public.liquor VALUES (9, 'Sweden', 60);
+INSERT INTO public.liquor VALUES (10, 'Israel', 69);
+INSERT INTO public.liquor VALUES (11, 'Austria', 75);
+INSERT INTO public.liquor VALUES (12, 'United States', 158);
+INSERT INTO public.liquor VALUES (13, 'Costa Rica', 87);
+INSERT INTO public.liquor VALUES (14, 'Germany', 117);
+INSERT INTO public.liquor VALUES (15, 'Brazil', 145);
+INSERT INTO public.liquor VALUES (16, 'Belgium', 84);
+INSERT INTO public.liquor VALUES (17, 'Ireland', 118);
+INSERT INTO public.liquor VALUES (18, 'Luxembourg', 133);
+INSERT INTO public.liquor VALUES (19, 'Mexico', 68);
+INSERT INTO public.liquor VALUES (20, 'Singapore', 12);
+INSERT INTO public.liquor VALUES (21, 'United Kingdom', 126);
+INSERT INTO public.liquor VALUES (22, 'Chile', 124);
+INSERT INTO public.liquor VALUES (23, 'Panama', 104);
+INSERT INTO public.liquor VALUES (24, 'Argentina', 25);
+INSERT INTO public.liquor VALUES (25, 'Czech Republic', 170);
+INSERT INTO public.liquor VALUES (26, 'United Arab Emirates', 135);
+INSERT INTO public.liquor VALUES (27, 'Uruguay', 35);
+INSERT INTO public.liquor VALUES (28, 'Malta', 100);
+INSERT INTO public.liquor VALUES (29, 'Colombia', 76);
+INSERT INTO public.liquor VALUES (30, 'France', 151);
+INSERT INTO public.liquor VALUES (31, 'Thailand', 258);
+INSERT INTO public.liquor VALUES (32, 'Qatar', 42);
+INSERT INTO public.liquor VALUES (33, 'Spain', 157);
+INSERT INTO public.liquor VALUES (34, 'Guatemala', 69);
+INSERT INTO public.liquor VALUES (35, 'Suriname', 178);
+INSERT INTO public.liquor VALUES (36, 'Bahrain', 63);
+INSERT INTO public.liquor VALUES (37, 'Trinidad and Tobago', 156);
+INSERT INTO public.liquor VALUES (38, 'Venezuela', 100);
+INSERT INTO public.liquor VALUES (39, 'Slovakia', 293);
+INSERT INTO public.liquor VALUES (40, 'El Salvador', 69);
+INSERT INTO public.liquor VALUES (41, 'Nicaragua', 118);
+INSERT INTO public.liquor VALUES (42, 'Uzbekistan', 101);
+INSERT INTO public.liquor VALUES (43, 'Italy', 42);
+INSERT INTO public.liquor VALUES (44, 'Ecuador', 74);
+INSERT INTO public.liquor VALUES (45, 'Belize', 114);
+INSERT INTO public.liquor VALUES (46, 'Japan', 202);
+INSERT INTO public.liquor VALUES (47, 'Kazakhstan', 246);
+INSERT INTO public.liquor VALUES (48, 'Moldova', 226);
+INSERT INTO public.liquor VALUES (49, 'Russian Federation', 326);
+INSERT INTO public.liquor VALUES (50, 'Poland', 215);
+INSERT INTO public.liquor VALUES (51, 'South Korea', 16);
+INSERT INTO public.liquor VALUES (52, 'Bolivia', 41);
+INSERT INTO public.liquor VALUES (53, 'Lithuania', 244);
+INSERT INTO public.liquor VALUES (54, 'Belarus', 373);
+INSERT INTO public.liquor VALUES (55, 'Slovenia', 51);
+INSERT INTO public.liquor VALUES (56, 'Peru', 160);
+INSERT INTO public.liquor VALUES (57, 'Turkmenistan', 71);
+INSERT INTO public.liquor VALUES (58, 'Mauritius', 31);
+INSERT INTO public.liquor VALUES (59, 'Latvia', 216);
+INSERT INTO public.liquor VALUES (60, 'Cyprus', 154);
+INSERT INTO public.liquor VALUES (61, 'Paraguay', 117);
+INSERT INTO public.liquor VALUES (62, 'Romania', 122);
+INSERT INTO public.liquor VALUES (63, 'Estonia', 194);
+INSERT INTO public.liquor VALUES (64, 'Jamaica', 97);
+INSERT INTO public.liquor VALUES (65, 'Croatia', 87);
+INSERT INTO public.liquor VALUES (66, 'Turkey', 22);
+INSERT INTO public.liquor VALUES (67, 'Jordan', 21);
+INSERT INTO public.liquor VALUES (68, 'Azerbaijan', 46);
+INSERT INTO public.liquor VALUES (69, 'Philippines', 186);
+INSERT INTO public.liquor VALUES (70, 'China', 192);
+INSERT INTO public.liquor VALUES (71, 'Kyrgyzstan', 97);
+INSERT INTO public.liquor VALUES (72, 'Serbia', 131);
+INSERT INTO public.liquor VALUES (73, 'Bosnia and Herzegovina', 173);
+INSERT INTO public.liquor VALUES (74, 'Montenegro', 114);
+INSERT INTO public.liquor VALUES (75, 'Dominican Republic', 147);
+INSERT INTO public.liquor VALUES (76, 'Morocco', 6);
+INSERT INTO public.liquor VALUES (77, 'Hungary', 215);
+INSERT INTO public.liquor VALUES (78, 'Lebanon', 55);
+INSERT INTO public.liquor VALUES (79, 'Portugal', 67);
+INSERT INTO public.liquor VALUES (80, 'Macedonia', 27);
+INSERT INTO public.liquor VALUES (81, 'Vietnam', 2);
+INSERT INTO public.liquor VALUES (82, 'Tunisia', 3);
+INSERT INTO public.liquor VALUES (83, 'Greece', 112);
+INSERT INTO public.liquor VALUES (84, 'Mongolia', 189);
+INSERT INTO public.liquor VALUES (85, 'Nigeria', 5);
+INSERT INTO public.liquor VALUES (86, 'Honduras', 98);
+INSERT INTO public.liquor VALUES (87, 'Zambia', 19);
+INSERT INTO public.liquor VALUES (88, 'Albania', 132);
+INSERT INTO public.liquor VALUES (89, 'Sierra Leone', 3);
+INSERT INTO public.liquor VALUES (90, 'Namibia', 3);
+INSERT INTO public.liquor VALUES (91, 'Cameroon', 1);
+INSERT INTO public.liquor VALUES (92, 'South Africa', 76);
+INSERT INTO public.liquor VALUES (93, 'Egypt', 4);
+INSERT INTO public.liquor VALUES (94, 'Armenia', 179);
+INSERT INTO public.liquor VALUES (95, 'Kenya', 22);
+INSERT INTO public.liquor VALUES (96, 'Ukraine', 237);
+INSERT INTO public.liquor VALUES (97, 'Ghana', 3);
+INSERT INTO public.liquor VALUES (98, 'Dem. Rep. Congo', 3);
+INSERT INTO public.liquor VALUES (99, 'Georgia', 100);
+INSERT INTO public.liquor VALUES (100, 'Rep. Congo', 1);
+INSERT INTO public.liquor VALUES (101, 'Senegal', 1);
+INSERT INTO public.liquor VALUES (102, 'Bulgaria', 252);
+INSERT INTO public.liquor VALUES (103, 'Zimbabwe', 18);
+INSERT INTO public.liquor VALUES (104, 'Malawi', 11);
+INSERT INTO public.liquor VALUES (105, 'Gabon', 98);
+INSERT INTO public.liquor VALUES (106, 'Mali', 1);
+INSERT INTO public.liquor VALUES (107, 'Haiti', 326);
+INSERT INTO public.liquor VALUES (108, 'Botswana', 35);
+INSERT INTO public.liquor VALUES (109, 'Comoros', 3);
+INSERT INTO public.liquor VALUES (110, 'Cote d''Ivoire', 1);
+INSERT INTO public.liquor VALUES (111, 'Cambodia', 65);
+INSERT INTO public.liquor VALUES (112, 'Angola', 57);
+INSERT INTO public.liquor VALUES (113, 'Niger', 2);
+INSERT INTO public.liquor VALUES (114, 'Chad', 1);
+INSERT INTO public.liquor VALUES (115, 'Burkina Faso', 7);
+INSERT INTO public.liquor VALUES (116, 'Madagascar', 15);
+INSERT INTO public.liquor VALUES (117, 'Tanzania', 6);
+INSERT INTO public.liquor VALUES (118, 'Liberia', 152);
+INSERT INTO public.liquor VALUES (119, 'Benin', 4);
+INSERT INTO public.liquor VALUES (120, 'Togo', 2);
+INSERT INTO public.liquor VALUES (121, 'Syria', 35);
+
+
+--
+-- TOC entry 2855 (class 0 OID 17207)
+-- Dependencies: 203
+-- Data for Name: wine; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.wine VALUES (0, 'Denmark', 278);
+INSERT INTO public.wine VALUES (1, 'Switzerland', 280);
+INSERT INTO public.wine VALUES (2, 'Iceland', 78);
+INSERT INTO public.wine VALUES (3, 'Norway', 129);
+INSERT INTO public.wine VALUES (4, 'Finland', 97);
+INSERT INTO public.wine VALUES (5, 'Canada', 100);
+INSERT INTO public.wine VALUES (6, 'Netherlands', 190);
+INSERT INTO public.wine VALUES (7, 'New Zealand', 175);
+INSERT INTO public.wine VALUES (8, 'Australia', 212);
+INSERT INTO public.wine VALUES (9, 'Sweden', 186);
+INSERT INTO public.wine VALUES (10, 'Israel', 9);
+INSERT INTO public.wine VALUES (11, 'Austria', 191);
+INSERT INTO public.wine VALUES (12, 'United States', 84);
+INSERT INTO public.wine VALUES (13, 'Costa Rica', 11);
+INSERT INTO public.wine VALUES (14, 'Germany', 175);
+INSERT INTO public.wine VALUES (15, 'Brazil', 16);
+INSERT INTO public.wine VALUES (16, 'Belgium', 212);
+INSERT INTO public.wine VALUES (17, 'Ireland', 165);
+INSERT INTO public.wine VALUES (18, 'Luxembourg', 271);
+INSERT INTO public.wine VALUES (19, 'Mexico', 5);
+INSERT INTO public.wine VALUES (20, 'Singapore', 11);
+INSERT INTO public.wine VALUES (21, 'United Kingdom', 195);
+INSERT INTO public.wine VALUES (22, 'Chile', 172);
+INSERT INTO public.wine VALUES (23, 'Panama', 18);
+INSERT INTO public.wine VALUES (24, 'Argentina', 221);
+INSERT INTO public.wine VALUES (25, 'Czech Republic', 134);
+INSERT INTO public.wine VALUES (26, 'United Arab Emirates', 5);
+INSERT INTO public.wine VALUES (27, 'Uruguay', 220);
+INSERT INTO public.wine VALUES (28, 'Malta', 120);
+INSERT INTO public.wine VALUES (29, 'Colombia', 3);
+INSERT INTO public.wine VALUES (30, 'France', 370);
+INSERT INTO public.wine VALUES (31, 'Thailand', 1);
+INSERT INTO public.wine VALUES (32, 'Qatar', 7);
+INSERT INTO public.wine VALUES (33, 'Spain', 112);
+INSERT INTO public.wine VALUES (34, 'Guatemala', 2);
+INSERT INTO public.wine VALUES (35, 'Suriname', 7);
+INSERT INTO public.wine VALUES (36, 'Bahrain', 7);
+INSERT INTO public.wine VALUES (37, 'Trinidad and Tobago', 7);
+INSERT INTO public.wine VALUES (38, 'Venezuela', 3);
+INSERT INTO public.wine VALUES (39, 'Slovakia', 116);
+INSERT INTO public.wine VALUES (40, 'El Salvador', 2);
+INSERT INTO public.wine VALUES (41, 'Nicaragua', 1);
+INSERT INTO public.wine VALUES (42, 'Uzbekistan', 8);
+INSERT INTO public.wine VALUES (43, 'Italy', 237);
+INSERT INTO public.wine VALUES (44, 'Ecuador', 3);
+INSERT INTO public.wine VALUES (45, 'Belize', 8);
+INSERT INTO public.wine VALUES (46, 'Japan', 16);
+INSERT INTO public.wine VALUES (47, 'Kazakhstan', 12);
+INSERT INTO public.wine VALUES (48, 'Moldova', 18);
+INSERT INTO public.wine VALUES (49, 'Russian Federation', 73);
+INSERT INTO public.wine VALUES (50, 'Poland', 56);
+INSERT INTO public.wine VALUES (51, 'South Korea', 9);
+INSERT INTO public.wine VALUES (52, 'Bolivia', 8);
+INSERT INTO public.wine VALUES (53, 'Lithuania', 56);
+INSERT INTO public.wine VALUES (54, 'Belarus', 42);
+INSERT INTO public.wine VALUES (55, 'Slovenia', 276);
+INSERT INTO public.wine VALUES (56, 'Peru', 21);
+INSERT INTO public.wine VALUES (57, 'Turkmenistan', 32);
+INSERT INTO public.wine VALUES (58, 'Mauritius', 18);
+INSERT INTO public.wine VALUES (59, 'Latvia', 62);
+INSERT INTO public.wine VALUES (60, 'Cyprus', 113);
+INSERT INTO public.wine VALUES (61, 'Paraguay', 74);
+INSERT INTO public.wine VALUES (62, 'Romania', 167);
+INSERT INTO public.wine VALUES (63, 'Estonia', 59);
+INSERT INTO public.wine VALUES (64, 'Jamaica', 9);
+INSERT INTO public.wine VALUES (65, 'Croatia', 254);
+INSERT INTO public.wine VALUES (66, 'Turkey', 7);
+INSERT INTO public.wine VALUES (67, 'Jordan', 1);
+INSERT INTO public.wine VALUES (68, 'Azerbaijan', 5);
+INSERT INTO public.wine VALUES (69, 'Philippines', 1);
+INSERT INTO public.wine VALUES (70, 'China', 8);
+INSERT INTO public.wine VALUES (71, 'Kyrgyzstan', 6);
+INSERT INTO public.wine VALUES (72, 'Serbia', 127);
+INSERT INTO public.wine VALUES (73, 'Bosnia and Herzegovina', 8);
+INSERT INTO public.wine VALUES (74, 'Montenegro', 128);
+INSERT INTO public.wine VALUES (75, 'Dominican Republic', 9);
+INSERT INTO public.wine VALUES (76, 'Morocco', 10);
+INSERT INTO public.wine VALUES (77, 'Hungary', 185);
+INSERT INTO public.wine VALUES (78, 'Lebanon', 31);
+INSERT INTO public.wine VALUES (79, 'Portugal', 339);
+INSERT INTO public.wine VALUES (80, 'Macedonia', 86);
+INSERT INTO public.wine VALUES (81, 'Vietnam', 1);
+INSERT INTO public.wine VALUES (82, 'Tunisia', 20);
+INSERT INTO public.wine VALUES (83, 'Greece', 218);
+INSERT INTO public.wine VALUES (84, 'Mongolia', 8);
+INSERT INTO public.wine VALUES (85, 'Nigeria', 2);
+INSERT INTO public.wine VALUES (86, 'Honduras', 2);
+INSERT INTO public.wine VALUES (87, 'Zambia', 4);
+INSERT INTO public.wine VALUES (88, 'Albania', 54);
+INSERT INTO public.wine VALUES (89, 'Sierra Leone', 2);
+INSERT INTO public.wine VALUES (90, 'Namibia', 1);
+INSERT INTO public.wine VALUES (91, 'Cameroon', 4);
+INSERT INTO public.wine VALUES (92, 'South Africa', 81);
+INSERT INTO public.wine VALUES (93, 'Egypt', 1);
+INSERT INTO public.wine VALUES (94, 'Armenia', 11);
+INSERT INTO public.wine VALUES (95, 'Kenya', 2);
+INSERT INTO public.wine VALUES (96, 'Ukraine', 45);
+INSERT INTO public.wine VALUES (97, 'Ghana', 10);
+INSERT INTO public.wine VALUES (98, 'Dem. Rep. Congo', 1);
+INSERT INTO public.wine VALUES (99, 'Georgia', 149);
+INSERT INTO public.wine VALUES (100, 'Rep. Congo', 9);
+INSERT INTO public.wine VALUES (101, 'Senegal', 7);
+INSERT INTO public.wine VALUES (102, 'Bulgaria', 94);
+INSERT INTO public.wine VALUES (103, 'Zimbabwe', 4);
+INSERT INTO public.wine VALUES (104, 'Malawi', 1);
+INSERT INTO public.wine VALUES (105, 'Gabon', 59);
+INSERT INTO public.wine VALUES (106, 'Mali', 1);
+INSERT INTO public.wine VALUES (107, 'Haiti', 1);
+INSERT INTO public.wine VALUES (108, 'Botswana', 35);
+INSERT INTO public.wine VALUES (109, 'Comoros', 1);
+INSERT INTO public.wine VALUES (110, 'Cote d''Ivoire', 7);
+INSERT INTO public.wine VALUES (111, 'Cambodia', 1);
+INSERT INTO public.wine VALUES (112, 'Angola', 45);
+INSERT INTO public.wine VALUES (113, 'Niger', 1);
+INSERT INTO public.wine VALUES (114, 'Chad', 1);
+INSERT INTO public.wine VALUES (115, 'Burkina Faso', 7);
+INSERT INTO public.wine VALUES (116, 'Madagascar', 4);
+INSERT INTO public.wine VALUES (117, 'Tanzania', 1);
+INSERT INTO public.wine VALUES (118, 'Liberia', 2);
+INSERT INTO public.wine VALUES (119, 'Benin', 13);
+INSERT INTO public.wine VALUES (120, 'Togo', 19);
+INSERT INTO public.wine VALUES (121, 'Syria', 16);
+
+
+--
+-- TOC entry 2725 (class 1259 OID 17206)
+-- Name: ix_beer_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_beer_index ON public.beer USING btree (index);
+
+
+--
+-- TOC entry 2719 (class 1259 OID 17164)
+-- Name: ix_bigmac_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_bigmac_index ON public.bigmac USING btree (index);
+
+
+--
+-- TOC entry 2722 (class 1259 OID 17185)
+-- Name: ix_country_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_country_index ON public.country USING btree (index);
+
+
+--
+-- TOC entry 2723 (class 1259 OID 17192)
+-- Name: ix_exchange_rate_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_exchange_rate_index ON public.exchange_rate USING btree (index);
+
+
+--
+-- TOC entry 2720 (class 1259 OID 17171)
+-- Name: ix_gender_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_gender_index ON public.gender USING btree (index);
+
+
+--
+-- TOC entry 2721 (class 1259 OID 17178)
+-- Name: ix_happy_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_happy_index ON public.happy USING btree (index);
+
+
+--
+-- TOC entry 2724 (class 1259 OID 17199)
+-- Name: ix_liquor_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_liquor_index ON public.liquor USING btree (index);
+
+
+--
+-- TOC entry 2726 (class 1259 OID 17213)
+-- Name: ix_wine_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX ix_wine_index ON public.wine USING btree (index);
+
+
+-- Completed on 2020-03-07 11:04:15
+
+--
+-- PostgreSQL database dump complete
+--
+
